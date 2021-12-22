@@ -1,0 +1,76 @@
+<%- include('header'); -%>
+<link rel="stylesheet" href="./homepage.css">
+</head>
+<body>
+
+    <%- include('navbar'); -%>
+<div class="container">
+    <div class="formbox mx-5 my-3">
+    <form class="mx-5 py-3" action="" method="post">
+        <div class="form-group">
+            <label for="inputAddress">Address</label>
+            <input type="text" class="form-control" name="inputAddress" id="inputAddress" placeholder="1234 Main St">
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputCity">City</label>
+                <input type="text" class="form-control" name="inputCity" id="inputCity">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputState">State</label>
+                <input type="text" id="inputState" name="inputState" class="form-control">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputZip">Zip</label>
+                <input type="text" class="form-control" name="inputZip" id="inputZip">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description">Description of the property</label>
+            <input type="text" class="form-control" name="description" id="description" placeholder="Eg: 3BHK, centrally located etc">
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="area">Area (In Sq. Feet)</label>
+                <input type="text" class="form-control" name="area" id="area">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="price">Price</label>
+                <input type="text" id="price" name="price" class="form-control">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="rent">Sell/Rent</label>
+                <select id="rent" name="rent" class="form-control">
+                     <option selected>Sell</option>
+                     <option>Rent</option>
+                </select>
+            </div>
+        </div>
+        <% if(typeof msg !='undefined' ){ %>
+            <div class="success-msg">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong>
+                    <%= msg %>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+            </div>
+        <% } %>
+        <% if(typeof error !=='undefined' ){ %>
+            <div class="err-msg">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Error!</strong>
+                    <%= error %>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+        
+            </div>
+            <% } %>
+        <button type="submit" class="mt-4 btn btn-primary">Add</button>
+    </form>
+</div>
+</div>
+<%- include('footer'); -%>
