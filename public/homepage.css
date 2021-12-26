@@ -69,3 +69,35 @@ nav {
   align-items: center;
   justify-content: center;
 }
+
+.listedproperties {
+  font-weight: 500;
+  color: white;
+  padding: 0.75rem;
+  margin: 0.5rem;
+  text-decoration: none;
+  border: 2px white solid;
+  text-transform: uppercase;
+}
+
+.listedproperties:hover {
+  text-transform: uppercase;
+  color: black;
+  text-decoration: none;
+  background-color: white;
+  transition: background-color 500ms linear;
+}
+
+.reports {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.stat {
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 40px;
+}

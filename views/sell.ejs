@@ -1,5 +1,6 @@
 <%- include('header'); -%>
 <link rel="stylesheet" href="./homepage.css">
+
 </head>
 <body>
 
@@ -72,5 +73,12 @@
         <button type="submit" class="mt-4 btn btn-primary">Add</button>
     </form>
 </div>
+
 </div>
+<div class="container">
+<div>
+    <a class="listedproperties" href="./mylistings/<%= user.email %>">View Properties I have listed</a>
+</div>
+</div>
+
 <%- include('footer'); -%>

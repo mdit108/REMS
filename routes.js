@@ -2,14 +2,21 @@ const router = require("express").Router();
 const { body } = require("express-validator");
 
 const {
+    mylistings,
     homePage,
     sellPage,
+    viewPage,
     register,
     registerPage,
     login,
     loginPage,
     addProperty,
+    deletelisting,
+    transactionForm,
+    reports,
 } = require("./controllers/userController");
+const { insertTransactionn } = require("./models/Transaction.model");
+const dbConnection = require("./utils/dbConnection");
 
 const ifNotLoggedin = (req, res, next) => {
     if(!req.session.userID){
@@ -27,7 +34,36 @@ const ifLoggedin = (req,res,next) => {
 
 router.get('/', ifNotLoggedin, homePage);
 
+router.post('/', ifNotLoggedin,[
+        body("price", "Enter a Price")
+            .notEmpty(),
+        body("buyerName", "Enter buyer name")
+            .notEmpty()
+            .trim()
+
+    ], async(req,res,next) => {
+    
+            try{
+                const {buyerName,price,seller,propid} = req.body;
+                console.log(buyerName);
+                const transactionObj = {
+                    sellerID : seller,
+                    buyerName : buyerName,
+                    amount : price
+                }
+                const result = await insertTransactionn(transactionObj);
+                const [query] = await dbConnection.execute("DELETE FROM `properties` WHERE `propid`=?",[propid]);
+                res.redirect('/');
+            }
+            catch(e){
+                console.log(e);
+                next(e);
+            }
+});
+
 router.get("/login", ifLoggedin, loginPage);
+
+router.get("/reportsGen",ifNotLoggedin,reports);
 
 router.post("/login",
 ifLoggedin,
@@ -44,6 +80,15 @@ ifLoggedin,
     ],
     login
 );
+router.get("/viewPage",ifNotLoggedin,viewPage);
+// router.post("/mylistings/:id/:propid",ifNotLoggedin,deletelisting);
+
+router.post("/mylistings/:id/:propid",ifNotLoggedin,transactionForm);
+router.get("/mylistings/:id",ifNotLoggedin,mylistings);
+
+
+
+
 router.get("/sellPage",ifNotLoggedin, sellPage);
 router.post("/sellPage",
     ifNotLoggedin,
@@ -72,6 +117,8 @@ router.post("/sellPage",
     ],
     addProperty
 )
+
+
 router.get("/signup", ifLoggedin, registerPage);
 router.post(
     "/signup",
@@ -104,5 +151,7 @@ router.get('/logout', (req, res, next) => {
     });
     res.redirect('/login');
 });
+
+
 
 module.exports = router;

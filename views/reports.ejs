@@ -1,0 +1,26 @@
+<%- include('header'); -%>
+    <link rel="stylesheet" href="./homepage.css">
+    </head>
+
+    <body>
+        <%- include('navbar'); -%>
+        <div class="container reports">
+            <div class="stat">
+                Number of Registered Users <%= numberUsers %>
+            </div>
+            <div class="stat">
+                <div class="writeup">
+                    Number of active property listings <%= numberActive %>
+                </div>
+                <div class="number">
+
+                </div>
+            </div>
+            <div class="stat">
+                Number of Transactions made <%= numberTransaction %>
+            </div>
+            <div class="stat">
+                Highest Transaction made <%= numberHighest %>
+            </div>
+        </div>
+<%- include('footer'); -%>
