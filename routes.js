@@ -14,6 +14,7 @@ const {
     deletelisting,
     transactionForm,
     reports,
+    sellerInfo,
 } = require("./controllers/userController");
 const { insertTransactionn } = require("./models/Transaction.model");
 const dbConnection = require("./utils/dbConnection");
@@ -81,11 +82,11 @@ ifLoggedin,
     login
 );
 router.get("/viewPage",ifNotLoggedin,viewPage);
+router.post("/viewPage/:propid",ifNotLoggedin,sellerInfo)
 // router.post("/mylistings/:id/:propid",ifNotLoggedin,deletelisting);
 
 router.post("/mylistings/:id/:propid",ifNotLoggedin,transactionForm);
 router.get("/mylistings/:id",ifNotLoggedin,mylistings);
-
 
 
 

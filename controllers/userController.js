@@ -43,6 +43,7 @@ exports.viewPage = async (req,res,next) => {
     res.render('view', {
         details,
         userdetails: rowdetails[0],
+        userID: req.session.userID,
         user: row[0]
     });
 }
@@ -179,22 +180,46 @@ exports.mylistings = async (req,res,next) => {
     });
     }
     catch(e){
+        console.log(e);
         next(e);
     }
     return res.render('listings');
 }
 
+exports.sellerInfo = async (req,res,next) => {
+
+    try{
+
+        // var name
+        // var address
+        // var phone
+
+        const [row] = await dbConnection.execute("SELECT name,remsdetails.phone,remsdetails.address FROM remsdetails,properties,remsusers WHERE properties.userid=remsusers.email AND remsusers.phone=remsdetails.phone AND properties.propid=?",[req.params.propid]);
+        return res.render('info',{
+            ownerdetails : row[0],
+        propid: req.params.propid
+    })
+    
+    }
+    catch(e){
+        console.log(e)
+        next()
+    }
+    return res.render('info',{
+        
+        propid: req.params.id
+    })
+    
+}
+
 
 exports.transactionForm = async (req,res,next) => {
-    console.log(req.params.id);
-    console.log(req.params.propid);
     return res.render('form',{
         seller: req.params.id,
         propid: req.params.propid
     });
 }
 exports.deletelisting = async (req,res,next) => {
-    console.log(req.params.propid)
     try{
         const [row] = await dbConnection.execute("SELECT * FROM `remsusers` WHERE `email`=?", [req.session.userID]);
     const [rowdetails] = await dbConnection.execute("SELECT * FROM `remsdetails` WHERE `phone`=?", [row[0].phone])
@@ -268,12 +293,33 @@ exports.reports = async(req,res,next) => {
                                 else{
                                 }
                             }).clone().sort({amount:-1})
+        if (highest.length == 0){
+            numberHighest = "No transactions made"
+        }
+        else{
         numberHighest = highest[0].amount
+        }
+
+        const lowest = await TransactionSchema
+                            .find({},function(err,result){
+                                if (err){
+                                    console.log(err)
+                                }
+                                else{
+                                }
+                            }).clone().sort({amount:0})
+        if (lowest.length == 0){
+            numberLowest = "No transactions made"
+        }
+        else{
+        numberLowest = lowest[0].amount
+        }
         return res.render('reports',{
          numberUsers,
          numberActive,
          numberTransaction,
-         numberHighest
+         numberHighest,
+         numberLowest,
     });
 }
 

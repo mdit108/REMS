@@ -6,21 +6,47 @@
         <%- include('navbar'); -%>
         <div class="container reports">
             <div class="stat">
-                Number of Registered Users <%= numberUsers %>
+                 
+                <div class="writeup">
+                    Number of Users registered this month:
+                </div>
+                <div class="number">
+                    <%= numberUsers %>
+                </div>
             </div>
             <div class="stat">
                 <div class="writeup">
-                    Number of active property listings <%= numberActive %>
+                    Number of active property listings this month:
                 </div>
                 <div class="number">
-
+                    <%= numberActive %>
                 </div>
             </div>
             <div class="stat">
-                Number of Transactions made <%= numberTransaction %>
+                <div class="writeup">
+                    Number of Total Transactions made:
+                </div>
+                <div class="number">
+                    <%= numberTransaction %>
+                </div>
             </div>
             <div class="stat">
-                Highest Transaction made <%= numberHighest %>
+                
+                <div class="writeup">
+                    Highest Transaction made:
+                </div>
+                <div class="number">
+                    ₹<%= numberHighest %>/-
+                </div>
             </div>
+            <!-- <div class="stat">
+            
+                <div class="writeup">
+                    Lowest Transaction made:
+                </div>
+                <div class="number">
+                    ₹<%= numberLowest %>/-
+                </div>
+            </div> -->
         </div>
 <%- include('footer'); -%>

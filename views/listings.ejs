@@ -31,6 +31,14 @@
         </div>
     </nav>
     <div class="container">
+        <% if (properties.length == 0) { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Alert!</strong> You have not listed any properties yet.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<% } %> 
         <% for (var i=0;i<properties.length;i++){ %>
             <div class="element">
                 <div class="left">

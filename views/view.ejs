@@ -9,32 +9,50 @@
         <h1> List of Properties </h1>
     </div>
     <div class="container">
+        <% if (details.length==0) { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Alert!</strong> No properties have been listed yet.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <% } %>
         <% for (var i=0;i<details.length;i++){ %>
             <div class="element">
                 <div class="left">
-                <div class="name">
-                    <%= details[i].name %>
-                </div>
-                <div class="address">
-                    <%= details[i].address %>
-                </div> 
-                <div class = "city">
-                    CITY: <%= details[i].city %>
-                </div>
-                <div class="desc">
-                    <%= details[i].description %>
-                </div>
-                <div class="price">
-                    <%= details[i].price %>/-
-                </div>
+                    <div class="name">
+                        <%= details[i].name %>
+                    </div>
+                    <div class="address">
+                        <%= details[i].address %>
+                    </div> 
+                    <div class = "city">
+                        CITY: <%= details[i].city %>
+                    </div>
+                    <div class="desc">
+                        <%= details[i].description %>
+                    </div>
+                    <div class="price">
+                        <%= details[i].price %>/-
+                    </div>
                 </div>
                 <div class="right">
                     <div class="area">
                         <%= details[i].area%> Sq. Feet
                     </div>
-                    <div class="interested">
+                    <form method="POST" action="./viewPage/<%= details[i].propid %>">
+                        <div class="interested">
+                            <button type="submit" class="mt-3 btn btn-primary">Get Details!</button>
+                        </div>
+                    </form>
+
+
+                    <!-- <div class="interested">
                         <a class="mt-3 btn btn-primary">Get Details!</a>
-                    </div>
+                    </div> -->
+
+
+
                 </div>
             </div>
         <% } %>

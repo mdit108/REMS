@@ -30,19 +30,21 @@
             </ul>
         </div>
     </nav>
+    <div class="container-fluid mt-5">
     <form method="post" action="/"> 
         <input type="text" hidden id="seller" name = "seller" value = "<%= seller %>">
         <input type="number" hidden name="propid" id="propid" value ="<%= propid %>" >
         <div class="form-group">
-            <label for="buyerName">Buyer's Name</label>
+            <label class="text-light" for="buyerName">Buyer's Name</label>
             <input type="text" name = "buyerName" class="form-control" id="buyerName" 
                 placeholder="Enter name of buyer">
         </div>
         <div class="form-group">
-            <label for="price">Price</label>
+            <label class="text-light" for="price">Price</label>
             <input type="number" name="price" class="form-control" id="price" placeholder="Price Agreed Upon">
         </div>
         
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    </div>
 <%- include('footer'); -%>
